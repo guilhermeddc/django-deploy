@@ -1,8 +1,14 @@
-# Deploy de aplicação Django na DigitalOcean
+# **Deploy** de aplicação Django na DigitalOcean
 
 ---
 
-### Criando e configurando via root
+### **app** - Nome do projeto
+
+### **deploy** - Nome do usuário
+
+---
+
+## Criando e configurando via root
 
 ---
 
@@ -21,7 +27,7 @@
 
 ---
 
-### Instalar ssh_keygen
+## Instalar ssh_keygen
 
 ---
 
@@ -29,7 +35,7 @@
 
 ---
 
-### Instalar Docker
+## Instalar Docker
 
 ---
 
@@ -43,12 +49,12 @@
 - sudo usermod -aG docker ${USER}
 - su - ${USER}
 - id -nG
-- sudo usermod -aG docker deploy
+- sudo usermod -aG docker **deploy**
 - docker run -d --name postgres -e POSTGRES_PASSWORD=29gu09il -e POSTGRES_USERNAME=postgres -e POSTGRES_DATABASE=delta -p 5432:5432 bitnami/postgresql:latest
 
 ---
 
-### Abrir portas
+## Abrir portas
 
 ---
 
@@ -58,7 +64,7 @@
 
 ---
 
-### Instalando Python
+## Instalando Python
 
 ---
 
@@ -69,7 +75,7 @@
 
 ---
 
-### Clonando projeto
+## Clonando projeto
 
 ---
 
@@ -79,7 +85,7 @@
 
 ---
 
-### Configurando o projeto
+## Configurando o projeto
 
 ---
 
@@ -93,7 +99,7 @@
 
 ---
 
-### Instalando Nginx
+## Instalando Nginx
 
 ---
 
@@ -102,7 +108,7 @@
 
 ---
 
-### Configurando Nginx / uWSGI
+## Configurando Nginx / uWSGI
 
 ---
 
@@ -163,7 +169,7 @@ server {
 - sudo ln -s /etc/nginx/sites-available/django.conf /etc/nginx/sites-enabled/
 - sudo rm default
 - cd
-- cd app/
+- cd **app**/
 - vim core/settings.py -> adicionar no ALLOWED_HOSTS = ['exemple.com', '000.000.000.000']
 - sudo /etc/init.d/nginx restart
 - uwsgi --socket mysite.sock --module core.wsgi --chmod-socket=666
@@ -185,18 +191,18 @@ chmod-socket    = 666
 
 ---
 
-### Configurar o uWSGI no modo Emperor
+## Configurar o uWSGI no modo Emperor
 
 ---
 
 - sudo mkdir /etc/uwsgi
 - sudo mkdir /etc/uwsgi/vassals
-- sudo ln -s /home/deploy/app/uwsgi.ini /etc/uwsgi/vassals/
+- sudo ln -s /home/**deploy**/**app**/uwsgi.ini /etc/uwsgi/vassals/
 - uwsgi --emperor /etc/uwsgi/vassals --uid www-data --gid www-data
 
 ---
 
-### Configurar systemctl
+## Configurar systemctl
 
 ---
 
@@ -231,7 +237,7 @@ WantedBy=multi-user.target
 
 ---
 
-### HTTPS --- https://certbot.eff.org/lets-encrypt/ubuntubionic-nginx
+## HTTPS --- https://certbot.eff.org/lets-encrypt/ubuntubionic-nginx
 
 ---
 
